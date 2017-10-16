@@ -123,13 +123,14 @@ function zero(val) {
 function solve() {
 	//invokes if number present and operator is not required
 	if (displayValue !== '' && operatorRequired === false) {
-		let solution = round(math.eval(current), 4); //evaluates answer for rounding 
+		let solution = parser(current.trim()); //passes string to parsing function for evaluation and return solution 
 		//limits any answer to under 10 billion
 		if (solution <= 9999999999.9999) {
+			solution = solution.toString(); //converts numerical solution to string
+			current = solution; //updates current string to string of answer
+			displayValue = solution; //updates current display value variable
 			display.innerText = solution; //updates display
 			smallDisplay.innerText = '0'; //clears string display
-			current = solution.toString(); //updates current string to string of answer
-			displayValue = solution; //updates current display value variable
 		}
 		else {// else if answer exceeds limit displays error message on both displays
 			display.innerText = 'ERROR';
@@ -141,7 +142,42 @@ function solve() {
 	}
 	clearAvailable = false; //allows use of CE key
 }
+//assigns corresponding functions to char equivalent of basic operators wherein operators in string can be parsed into mathematical functionality
+const operators = {
+    '*': function(a, b) { return a * b },
+    '/': function(a, b) { return a / b },
+    '+': function(a, b) { return a + b },
+    '-': function(a, b) { return a - b }   
+};
+//assigns char equivalents of basic operators to an array for reference in loops of parser allowing parser to follow order of operation
+const ref = ['*', '/', '+', '-'];
 //accurately rounds numbers over four decimal places
 function round(num, precision) { //accepts number to be evaluated for rounding and default degree of precion (4)
   return Number(Math.round(num + 'e' + precision) + 'e-' + precision);
+}
+//customized parsing function that transforms string of operation into a numerical expression that can be evaluated while following order of operation
+function parser(string) {
+	//splits string into an array enabling evaluation and manipulation of the data, and assigns iterator
+	let arr = string.split(' '), i = 0;
+	while (i <= 2) { //allows loop to run twice, based on initial value of 0 and incrementation by 2
+		//using indexOf method, runs while loop while either a (* or /) in first round  or (+ or -) in second round are present, as reduction of the chain/array occurs
+		while ((arr.indexOf(ref[i]) !== -1) && (arr.indexOf(ref[i + 1]) !== -1) || (arr.indexOf(ref[i]) !== -1) && (arr.indexOf(ref[i + 1]) === -1) || (arr.indexOf(ref[i]) === -1) && (arr.indexOf(ref[i + 1]) !== -1)) {
+			//evaluates first index of operators in question, or is assigned a -1 if one is not present, referencing the ref array using the iterator
+			let x = arr.indexOf(ref[i]), y = arr.indexOf(ref[i + 1]);
+			//if * or + (second round) occurs first, or other operator doesn't exist in string
+			if ((x < y && x !== -1) || (x > y && y === -1)) { 
+				//solution of evaluated expression, rounded via calling round(), by using appropriate operator from operators object, and the indices directly before and after the detected operator
+				newNum = round(operators[ref[i]](Number(arr[x - 1]), Number(arr[x + 1])), 4);
+				//splices out the numbers and operator evaluated and inserts the solution (in string format) from the evaluation, reducing array
+				arr.splice(x - 1, 3, newNum.toString());
+			}	
+			else {
+				//same operation as above, but for other operator
+				newNum = round(operators[ref[i + 1]](Number(arr[y - 1]), Number(arr[y + 1])), 4);
+				arr.splice(y - 1, 3, newNum.toString());
+			}
+		}
+		i += 2; //increments the iterator by 2 to access 2 and 3 indices of ref array
+	}
+	return Number(arr[0]); //returns the numerical solution
 }
