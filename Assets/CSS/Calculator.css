@@ -1,0 +1,103 @@
+body {
+	max-width: 1600px;
+	background-color: #e2dcd3;
+	font-family: 'Roboto Mono', monospace;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+h6 {
+	margin: 0 0 5px;
+	text-align: center;
+	font-size: 1em;
+}
+
+.container {
+	width: 300px;
+	overflow: hidden;
+	margin: 25px auto;
+	padding: 20px;
+	background-color: #cca36a;
+	border-radius: 20px;
+	box-shadow: 4px 4px 4px #2a2a2a, inset -5px -5px 15px #888888, inset 3px 3px 12px #888888
+}
+
+.screen {
+	width: 95%;
+	margin: 0 2.5% 10px;
+	overflow: hidden;
+	padding: 3px;
+	background-color: #e2dcd3;
+	border-radius: 5px;
+}
+
+h3 {
+	margin: 0;
+	text-align: right;
+	padding-right: 5px;
+	font-size: 2em;
+}
+
+h5 {
+	margin: 0;
+	text-align: right;
+	padding-right: 7px;
+	font-size: 0.9em;
+}
+
+.keys {
+	width: 21%;
+	margin: 2%;
+	float: left;
+	border-radius: 50%;
+	background-color: #540909;
+	box-shadow: 3px 3px 3px #2a2a2a;
+	border: none;
+    line-height: 60px;
+    color: #e2dcd3;
+    font-size: 1.2em;
+    font-weight: 600;
+	font-family: 'Roboto Mono', monospace;
+}
+
+.keys:hover {
+	cursor: pointer;
+}
+
+.keys:active {
+	box-shadow: none;
+}
+
+.keys:focus {
+	outline: 0;
+}
+
+.red {
+	background-color: #d61919 !important;
+}
+
+#equals {
+	width: 46%;
+	border-radius: 20px;
+}
+
+.light {
+	background-color: #e2dcd3 !important;
+	color: #1a1a1a !important;
+}
+
+p {
+	text-align: center;
+	padding: 0 20px;
+	font-weight: 700;
+	margin-bottom: 3px;
+}
+
+.credit {
+	margin-top: 3px;
+	margin-bottom: 20px;
+}
