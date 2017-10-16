@@ -67,7 +67,7 @@ function clearEntry() {
 //adds number to string of operation
 function updateNumber(val) {
 	//invokes if output display does not exceed max chars and if operator key not required
-	if (displayValue.length < 15 && operatorRequired === false) {
+	if (displayValue.length < 13 && operatorRequired === false) {
 		current += val; //concatenates current key clicked to current number data
 		if (displayValue === '') {displayValue = val;} //if initial number in entry, displays single number
 		else {displayValue += val;} //else displays multiple digit number
@@ -107,7 +107,7 @@ function decimalPoint(val) {
 		//if current entry is blank, adds a zero and trailing decimal, updates string, and display
 		if (displayValue === '') {displayValue = '0.'; current += displayValue; display.innerText = displayValue;}
 		//else adds decimal unless entry char count is one below limit
-		else {if (displayValue.length < 14) {updateNumber(val);}}
+		else {if (displayValue.length < 12) {updateNumber(val);}}
 	}
 	clearAvailable = true; //makes CE key available
 }
@@ -123,7 +123,7 @@ function zero(val) {
 function solve() {
 	//invokes if number present and operator is not required
 	if (displayValue !== '' && operatorRequired === false) {
-		let solution = parser(current.trim()); //passes string to parsing function for evaluation and return solution 
+		let solution = round(parser(current.trim()), 4); //passes string to parsing function for evaluation and return solution 
 		//limits any answer to under 10 billion
 		if (solution <= 9999999999.9999) {
 			solution = solution.toString(); //converts numerical solution to string
@@ -167,13 +167,13 @@ function parser(string) {
 			//if * or + (second round) occurs first, or other operator doesn't exist in string
 			if ((x < y && x !== -1) || (x > y && y === -1)) { 
 				//solution of evaluated expression, rounded via calling round(), by using appropriate operator from operators object, and the indices directly before and after the detected operator
-				newNum = round(operators[ref[i]](Number(arr[x - 1]), Number(arr[x + 1])), 4);
+				newNum = round(operators[ref[i]](Number(arr[x - 1]), Number(arr[x + 1])), 10);
 				//splices out the numbers and operator evaluated and inserts the solution (in string format) from the evaluation, reducing array
 				arr.splice(x - 1, 3, newNum.toString());
 			}	
 			else {
 				//same operation as above, but for other operator
-				newNum = round(operators[ref[i + 1]](Number(arr[y - 1]), Number(arr[y + 1])), 4);
+				newNum = round(operators[ref[i + 1]](Number(arr[y - 1]), Number(arr[y + 1])), 10);
 				arr.splice(y - 1, 3, newNum.toString());
 			}
 		}
