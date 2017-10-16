@@ -103,7 +103,7 @@ function posNeg() {
 //function controlling decimal operation
 function decimalPoint(val) {
 	//invokes if decimal is currently not in entry, and if operator is not required
-	if (/^[0-9]+[\.][0-9]*$/.test(displayValue) === false && operatorRequired === false) {
+	if (/^-?[0-9]+[\.][0-9]*$/.test(displayValue) === false && operatorRequired === false) {
 		//if current entry is blank, adds a zero and trailing decimal, updates string, and display
 		if (displayValue === '') {displayValue = '0.'; current += displayValue; display.innerText = displayValue;}
 		//else adds decimal unless entry char count is one below limit
@@ -123,7 +123,7 @@ function zero(val) {
 function solve() {
 	//invokes if number present and operator is not required
 	if (displayValue !== '' && operatorRequired === false) {
-		let solution = parser(current.trim()); //passes string to parsing function for evaluation and return solution 
+		let solution = round(parser(current.trim())); //passes string to parsing function for evaluation and return solution 
 		//limits any answer to under 10 billion
 		if (solution <= 9999999999.9999) {
 			solution = solution.toString(); //converts numerical solution to string
