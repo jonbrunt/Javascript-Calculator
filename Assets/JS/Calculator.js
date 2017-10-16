@@ -123,7 +123,7 @@ function zero(val) {
 function solve() {
 	//invokes if number present and operator is not required
 	if (displayValue !== '' && operatorRequired === false) {
-		let solution = round(parser(current.trim())); //passes string to parsing function for evaluation and return solution 
+		let solution = parser(current.trim()); //passes string to parsing function for evaluation and return solution 
 		//limits any answer to under 10 billion
 		if (solution <= 9999999999.9999) {
 			solution = solution.toString(); //converts numerical solution to string
