@@ -161,7 +161,7 @@ function parser(string) {
 	let arr = string.split(' '), i = 0;
 	while (i <= 2) { //allows loop to run twice, based on initial value of 0 and incrementation by 2
 		//using indexOf method, runs while loop while either a (* or /) in first round  or (+ or -) in second round are present, as reduction of the chain/array occurs
-		while ((arr.indexOf(ref[i]) !== -1) && (arr.indexOf(ref[i + 1]) !== -1) || (arr.indexOf(ref[i]) !== -1) && (arr.indexOf(ref[i + 1]) === -1) || (arr.indexOf(ref[i]) === -1) && (arr.indexOf(ref[i + 1]) !== -1)) {
+		while (!(arr.indexOf(ref[i]) === - 1 && arr.indexOf(ref[i + 1]) === -1)) {
 			//evaluates first index of operators in question, or is assigned a -1 if one is not present, referencing the ref array using the iterator
 			let x = arr.indexOf(ref[i]), y = arr.indexOf(ref[i + 1]);
 			//if * or + (second round) occurs first, or other operator doesn't exist in string
