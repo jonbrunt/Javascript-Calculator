@@ -11,7 +11,7 @@ let operatorRequired = false; //controls operator input requirement after "clear
 main();
 //main operation that detects and manipulates key input and controls process flow
 function main() {
-	//iteraties over all key targets to select key clicked
+	//iterates over all key targets to select key clicked
 	for (let i = 0; i <= 18; i++) {
 		keys[i].addEventListener('click', function () {
 	    	sound(); //triggers key tone mp3
