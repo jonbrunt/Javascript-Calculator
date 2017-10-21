@@ -166,16 +166,14 @@ function parser(string) {
 			let x = arr.indexOf(ref[i]), y = arr.indexOf(ref[i + 1]);
 			//if * or + (second round) occurs first, or other operator doesn't exist in string
 			if ((x < y && x !== -1) || (x > y && y === -1)) { 
-				//solution of evaluated expression, rounded via calling round(), by using appropriate operator from operators object, and the indices directly before and after the detected operator
-				newNum = round(operators[ref[i]](Number(arr[x - 1]), Number(arr[x + 1])), 10);
-				//splices out the numbers and operator evaluated and inserts the solution (in string format) from the evaluation, reducing array
-				arr.splice(x - 1, 3, newNum.toString());
-			}	
-			else {
-				//same operation as above, but for other operator
-				newNum = round(operators[ref[i + 1]](Number(arr[y - 1]), Number(arr[y + 1])), 10);
-				arr.splice(y - 1, 3, newNum.toString());
+				a = i; b = x - 1; c = x + 1;
+			}	else { //if / or - (second round) occurs first
+				a = i + 1; b = y - 1; c = y + 1;
 			}
+			//solution of evaluated expression, rounded via calling round(), by using appropriate operator from operators object, and the indices directly before and after the detected operator
+			newNum = round(operators[ref[a]](Number(arr[b]), Number(arr[c])), 10);
+			//splices out the numbers and operator evaluated and inserts the solution (in string format) from the evaluation, reducing array
+			arr.splice(b, 3, newNum.toString());
 		}
 		i += 2; //increments the iterator by 2 to access 2 and 3 indices of ref array
 	}
