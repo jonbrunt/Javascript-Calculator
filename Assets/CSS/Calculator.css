@@ -1,5 +1,6 @@
 body {
 	max-width: 1600px;
+	margin: 0 auto;
 	/*background-color: #e2dcd3;*/
 	background-color: #8c9699;
 	font-family: 'Roboto Mono', monospace;
