@@ -55,6 +55,7 @@ h5 {
 }
 
 .keys {
+	touch-action: manipulation;
 	width: 21%;
 	margin: 2%;
 	float: left;
@@ -62,10 +63,10 @@ h5 {
 	background-color: #540909;
 	box-shadow: 3px 3px 3px #2a2a2a;
 	border: none;
-    line-height: 60px;
-    color: #e2dcd3;
-    font-size: 1.2em;
-    font-weight: 600;
+  line-height: 60px;
+  color: #e2dcd3;
+  font-size: 1.2em;
+  font-weight: 600;
 	font-family: 'Roboto Mono', monospace;
 }
 
